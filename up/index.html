@@ -6,11 +6,12 @@
     <!-- Bootstrap -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="up.css" rel="stylesheet">
+    <link href="up.css?ver=0.0.3" rel="stylesheet">
   </head>
   <body>
     <div class="parent">
-      <div class="block">
+      <div class="left">
+        <h3>Расчет завышения ипотеки:</h3>
         <form>
           <div class="form-group">
             <label for="rPrice">Реальная стоимость квартиры</label>
@@ -42,7 +43,33 @@
             <input type="number" class="form-control" id="PV" aria-describedby="PVHelp" readonly>
             <!--<small id="PVHelp" class="form-text text-muted">Сумма в расписке для банка</small>-->
           </div>
-          <a class="btn btn-primary" href="javascript:calculate();">Расчитать</a>
+          <a class="btn btn-primary" href="javascript:calculate();">Рассчитать</a>
+        </form>
+      </div>
+      <div class="right">
+        <h3>Расчет кредитных платежей:</h3>
+        <form>
+          <div class="form-group">
+            <label for="creditSum">Сумма кредита</label>
+            <input type="number" class="form-control" id="creditSum" step="5000">
+          </div>
+          <div class="form-group">
+            <label for="percentCredit">Процентная ставка</label>
+            <input type="number" class="form-control" id="percentCredit" min="0.01" max="100" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="periodCredit">Срок кредита в месяцах</label>
+            <input type="number" class="form-control" id="periodCredit" min="1" step="1">
+          </div>
+          <div class="form-group">
+            <label for="annPlatezh">Аннуитетный платеж</label>
+            <input type="number" class="form-control" id="annPlatezh" readonly>
+          </div>
+          <div class="form-group">
+            <label for="diffPlatezh">Максимальный дифференцированный платеж</label>
+            <input type="number" class="form-control" id="diffPlatezh" readonly>
+          </div>
+          <a class="btn btn-primary" href="javascript:platezh();">Рассчитать</a>
         </form>
       </div>
     </div>
@@ -53,6 +80,10 @@
       $("#rIpoteka").val($("#rPrice").val()-$("#rPV").val());
       $("#cPrice").val($("#rIpoteka").val()/(1-$("#pPV").val()/100));
       $("#PV").val($("#cPrice").val()-$("#rIpoteka").val());
+    }
+    function platezh(){
+      $("#diffPlatezh").val($("#creditSum").val()/$("#periodCredit").val()+$("#creditSum").val()*$("#percentCredit").val()/12/100);
+      $("#annPlatezh").val($("#creditSum").val()*($("#percentCredit").val()/100/12+$("#percentCredit").val()/100/12/(Math.pow(1+$("#percentCredit").val()/100/12,$("#periodCredit").val())-1)));
     }
   </script>
 </html>
