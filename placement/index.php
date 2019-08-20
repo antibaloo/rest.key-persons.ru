@@ -61,11 +61,6 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
             <input type="text" class="form-control" id="descriptionPlacement" aria-describedby="descriptionPlacementHelp">
             <small id="descriptionPlacementHelp" class="form-text text-muted">Описание обработчика, может выводиться по месту встраивания.</small>
           </div>
-          <div class="form-group">
-            <label for="groupPlacement">GROUP_NAME</label>
-            <input type="text" class="form-control" id="groupPlacement" aria-describedby="groupPlacementPlacementHelp">
-            <small id="groupPlacementPlacementHelp" class="form-text text-muted">Название группы, который позволяет группировать обработчики в месте встраивания. Не обязателен..</small>
-          </div>
           <button id="registration" class="btn btn-success">Установить</button>&nbsp;<button id="delete" class="btn btn-danger">Удалить</button>
         </form>
       </div>

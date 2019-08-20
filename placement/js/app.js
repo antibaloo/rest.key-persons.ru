@@ -19,6 +19,7 @@ $(document).ready(function(){
       if(result.error()) console.error(result.error());
       else {
         $placements = result.data();
+        console.log($placements);
         $.each($placements,function(index, value){
           $("#placementSelector").append('<option value='+index+'>'+value.title+'</option>');
         });
@@ -32,7 +33,6 @@ $('#placementSelector').on('change', function() {
     $("#titlePlacement").val($placements[this.value].title);
     $("#handlerPlacement").val($placements[this.value].handler);
     $("#placementPlacement option[value=" + $placements[this.value].placement + "]").attr('selected', 'true');
-    //$("#placementPlacement").val($placements[this.value].placement);
     $("#descriptionPlacement").val($placements[this.value].description);
   }
 });
@@ -46,7 +46,6 @@ $('.btn').on('click', function (){
           "HANDLER" : $("#handlerPlacement").val(),
           "TITLE" : $("#titlePlacement").val(),
           "DESCRIPTION" : $("#descriptionPlacement").val(),
-          "GROUP_NAME" : $("#groupPlacement").val()
         },
         function(result){
           if(result.error()) {
