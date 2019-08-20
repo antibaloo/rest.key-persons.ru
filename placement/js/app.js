@@ -7,9 +7,8 @@ $(document).ready(function(){
       if(result.error()) console.error(result.error());
       else{
         $.each(result.data(),function(index, value){
-          console.log('Индекс: '+index+'; значение '+value);
+          $("#placementPlacement").append('<option value='+value+'>'+value+'</option>');
         });
-        console.info(result.data());
       }
     }
   );
@@ -22,20 +21,59 @@ $(document).ready(function(){
         $placements = result.data();
         $.each($placements,function(index, value){
           $("#placementSelector").append('<option value='+index+'>'+value.title+'</option>');
-          console.log($placements[index].handler);
         });
-        console.info(result.data());
       }
     }
   );
 });
 $('#placementSelector').on('change', function() {
-  console.log(this.value);
-    if (this.value == 'undefined') document.getElementById("placementForm").reset();
-    else {
-      $("#titlePlacement").val($placements[this.value].title);
-      $("#handlerPlacement").val($placements[this.value].handler);
-      $("#placementPlacement").val($placements[this.value].placement);
-      $("#descriptionPlacement").val($placements[this.value].description);
-    }
+  if (this.value == 'undefined') document.getElementById("placementForm").reset();
+  else {
+    $("#titlePlacement").val($placements[this.value].title);
+    $("#handlerPlacement").val($placements[this.value].handler);
+    $("#placementPlacement option[value=" + $placements[this.value].placement + "]").attr('selected', 'true');
+    //$("#placementPlacement").val($placements[this.value].placement);
+    $("#descriptionPlacement").val($placements[this.value].description);
+  }
+});
+$('.btn').on('click', function (){
+  event.preventDefault();
+  switch ($(this).attr("id")){
+    case "registration":
+      BX24.callMethod(
+        'placement.bind',{
+         "PLACEMENT" : $("#placementPlacement").val(),
+          "HANDLER" : $("#handlerPlacement").val(),
+          "TITLE" : $("#titlePlacement").val(),
+          "DESCRIPTION" : $("#descriptionPlacement").val()
+        },
+        function(result){
+          if(result.error()) {
+            console.log(result.error());
+          }else{
+            location.reload();
+            //document.getElementById("blockForm").reset();
+            console.info(result.data());
+            //$('#blockSelector').append($("<option></option>").attr("value",result.data()).text(nameBlockTemp));
+          }
+        }
+      );
+      break;
+    case "delete":
+      BX24.callMethod(
+        'placement.unbind',{
+         "PLACEMENT" : $("#placementPlacement").val(),
+          "HANDLER" : $("#handlerPlacement").val(),
+        },
+        function(result){
+          if(result.error()) {
+            console.log(result.error());
+          }else{
+            location.reload();
+            console.info(result.data());
+          }
+        }
+      );
+      break;
+  }
 });

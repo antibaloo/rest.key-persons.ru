@@ -1,5 +1,6 @@
 <?php
 if (!substr_count($_REQUEST['DOMAIN'],'.bitrix24.ru')) die("ПНХ!");
+$placementOptions = isset($_REQUEST['PLACEMENT_OPTIONS']) ? json_decode($_REQUEST['PLACEMENT_OPTIONS'], true) : array();
 $queryUrl = 'https://'.$_REQUEST['DOMAIN'].'/rest/user.current.json';
 
 // as user.current does not have any specific parameters we just set an access_token ("auth")
@@ -18,6 +19,7 @@ curl_setopt_array($curl, array(
 
 $user = json_decode(curl_exec($curl), true);
 curl_close($curl);
+if ($user['result']['ID']<>1) die("У вас нет прав для работы с приложением!!!");
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -45,9 +47,17 @@ curl_close($curl);
             <input type="text" class="form-control" id="titlePlacement" aria-describedby="titlePlacementHelp">
             <small id="titlePlacementHelp" class="form-text text-muted">Заголовок обработчика, показывается по месту встранивания</small>
           </div>
+          <!--
           <div class="form-group">
             <label for="placementPlacement">PLACEMENT</label>
             <input type="text" class="form-control" id="placementPlacement" aria-describedby="placementPlacementHelp" required>
+            <small id="placementPlacementHelp" class="form-text text-muted">Идентификатор требуемого места встраивания</small>
+          </div>
+          -->
+          <div class="form-group">
+            <select id="placementPlacement" class="browser-default custom-select" aria-describedby="placementPlacementHelp" required>
+              <option value='undefined' selected>Выберите место встраивания</option>
+            </select>
             <small id="placementPlacementHelp" class="form-text text-muted">Идентификатор требуемого места встраивания</small>
           </div>
           <div class="form-group">
@@ -65,14 +75,27 @@ curl_close($curl);
       </div>
     </div>
     <?break;
+  case 'CRM_LEAD_DETAIL_TAB':?>
+    <div id="app" class="container-fluid">
+      <h4>Приложение вызвано из карточки лида № <?= $placementOptions['ID']?></h4>
+    </div>
+    <?break;
+  case 'CRM_DEAL_DETAIL_TAB':?>
+    <div id="app" class="container-fluid">
+      <h4>Приложение вызвано из карточки сделки № <?= $placementOptions['ID']?></h4>
+    </div>
+    <?break;
   default:?>
-    <div id="app" class="container-fluid">      
+    <div id="app" class="container-fluid">
+      <pre>
+      <?print_r($_REQUEST);?>
+      </pre>
     </div>
     <?break?>
 <?}?>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//api.bitrix24.com/api/v1/dev/"></script>
-    <script src="/placement/js/app.js?ver=0.0.18"></script>
+    <script src="/placement/js/app.js?ver=0.0.31"></script>
   </body>
 </html>
