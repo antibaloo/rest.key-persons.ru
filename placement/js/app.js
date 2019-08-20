@@ -45,7 +45,8 @@ $('.btn').on('click', function (){
          "PLACEMENT" : $("#placementPlacement").val(),
           "HANDLER" : $("#handlerPlacement").val(),
           "TITLE" : $("#titlePlacement").val(),
-          "DESCRIPTION" : $("#descriptionPlacement").val()
+          "DESCRIPTION" : $("#descriptionPlacement").val(),
+          "GROUP_NAME" : $("#groupPlacement").val()
         },
         function(result){
           if(result.error()) {

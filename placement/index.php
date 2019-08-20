@@ -31,8 +31,6 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
     <link rel="stylesheet" href="/placement/css/app.css?ver=0.0.1">
   </head>
   <body>
-<?switch ($_REQUEST['PLACEMENT']){
-  case 'DEFAULT':?>
     <div id="app" class="container-fluid">
       <div class="bs-callout bs-callout-info">
         <p>Текущий пользователь: <span id="user-name"><?=$user['result']['NAME'].' '.$user['result']['LAST_NAME'];?></span></p>
@@ -47,13 +45,6 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
             <input type="text" class="form-control" id="titlePlacement" aria-describedby="titlePlacementHelp">
             <small id="titlePlacementHelp" class="form-text text-muted">Заголовок обработчика, показывается по месту встранивания</small>
           </div>
-          <!--
-          <div class="form-group">
-            <label for="placementPlacement">PLACEMENT</label>
-            <input type="text" class="form-control" id="placementPlacement" aria-describedby="placementPlacementHelp" required>
-            <small id="placementPlacementHelp" class="form-text text-muted">Идентификатор требуемого места встраивания</small>
-          </div>
-          -->
           <div class="form-group">
             <select id="placementPlacement" class="browser-default custom-select" aria-describedby="placementPlacementHelp" required>
               <option value='undefined' selected>Выберите место встраивания</option>
@@ -70,32 +61,18 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
             <input type="text" class="form-control" id="descriptionPlacement" aria-describedby="descriptionPlacementHelp">
             <small id="descriptionPlacementHelp" class="form-text text-muted">Описание обработчика, может выводиться по месту встраивания.</small>
           </div>
+          <div class="form-group">
+            <label for="groupPlacement">GROUP_NAME</label>
+            <input type="text" class="form-control" id="groupPlacement" aria-describedby="groupPlacementPlacementHelp">
+            <small id="groupPlacementPlacementHelp" class="form-text text-muted">Название группы, который позволяет группировать обработчики в месте встраивания. Не обязателен..</small>
+          </div>
           <button id="registration" class="btn btn-success">Установить</button>&nbsp;<button id="delete" class="btn btn-danger">Удалить</button>
         </form>
       </div>
     </div>
-    <?break;
-  case 'CRM_LEAD_DETAIL_TAB':?>
-    <div id="app" class="container-fluid">
-      <h4>Приложение вызвано из карточки лида № <?= $placementOptions['ID']?></h4>
-    </div>
-    <?break;
-  case 'CRM_DEAL_DETAIL_TAB':?>
-    <div id="app" class="container-fluid">
-      <h4>Приложение вызвано из карточки сделки № <?= $placementOptions['ID']?></h4>
-    </div>
-    <?break;
-  default:?>
-    <div id="app" class="container-fluid">
-      <pre>
-      <?print_r($_REQUEST);?>
-      </pre>
-    </div>
-    <?break?>
-<?}?>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//api.bitrix24.com/api/v1/dev/"></script>
-    <script src="/placement/js/app.js?ver=0.0.31"></script>
+    <script src="/placement/js/app.js?ver=<?=time()?>"></script>
   </body>
 </html>
