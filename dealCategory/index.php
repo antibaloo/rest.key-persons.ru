@@ -33,6 +33,6 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//api.bitrix24.com/api/v1/dev/"></script>
-    <script src="/dealCategory/js/app.js?ver=0.0.1"></script>
+    <script src="/dealCategory/js/app.js?ver=<?=time()?>"></script>
   </body>
 </html>
