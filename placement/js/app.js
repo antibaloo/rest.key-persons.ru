@@ -18,9 +18,9 @@ $(document).ready(function(){
     function(result){
       if(result.error()) console.error(result.error());
       else {
-        $placements = result.data();
-        console.log($placements);
-        $.each($placements,function(index, value){
+        var placements = result.data();
+        console.log(placements);
+        $.each(placements,function(index, value){
           $("#placementSelector").append('<option value='+index+'>'+value.title+'</option>');
         });
       }
