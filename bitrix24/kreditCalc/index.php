@@ -6,7 +6,7 @@
     <!-- Bootstrap -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="up.css?ver=0.0.3" rel="stylesheet">
+    <link href="kreditCalc.css?ver=<?=time()?>" rel="stylesheet">
   </head>
   <body>
     <div class="parent">
