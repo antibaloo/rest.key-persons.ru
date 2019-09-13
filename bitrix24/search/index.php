@@ -1,24 +1,17 @@
 <?php
 if (!substr_count($_REQUEST['DOMAIN'],'.bitrix24.ru')) die("ПНХ!");
-$queryUrl = 'https://'.$_REQUEST['DOMAIN'].'/rest/user.current.json';
 
-// as user.current does not have any specific parameters we just set an access_token ("auth")
-$queryData = http_build_query(array(
-  "auth" => $_REQUEST['AUTH_ID']
-));
+$queryUrl = 'https://rosreestr.ru/api/online/macro_regions';
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_SSL_VERIFYPEER => 0,
-  CURLOPT_POST => 1,
   CURLOPT_HEADER => 0,
   CURLOPT_RETURNTRANSFER => 1,
   CURLOPT_URL => $queryUrl,
-  CURLOPT_POSTFIELDS => $queryData,
 ));
 
-$user = json_decode(curl_exec($curl), true);
+$macroRegionList = json_decode(curl_exec($curl), true);
 curl_close($curl);
-if ($user['result']['ID']<>1) die("У вас нет прав для работы с приложением!!!");
 ?>
 <!doctype html>
 <html lang="ru">
@@ -32,17 +25,45 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
   </head>
   <body>
     <div class="parent">
-      <div class="central">
-        <select id="blockSelector" class="browser-default custom-select">
-          <option selected>выберите субъект РФ</option>
-          <?foreach ($repoList['result'] as $repo){?>
-          <option value="<?=$repo['ID']?>"><?=$repo['NAME']?></option>
-          <?}?>
-        </select>
-      </div>
-      <div class="left">
-      </div>
-      <div class="right">
+      <form>
+        <div class="left">
+          <div class="form-group">
+            <label for="macroRegionId">Субъект РФ</label>
+            <select id="macroRegionId" class="browser-default custom-select">
+              <option value="" selected>выберите субъект РФ</option>
+              <?foreach ($macroRegionList as $macroRegion){?>
+              <option value="<?=$macroRegion['id']?>"><?=$macroRegion['name']?></option>
+              <?}?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="regionId">Район субъекта РФ/Город</label>
+            <select id="regionId" class="browser-default custom-select" disabled>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="settlementId">Населенный пункт</label>
+            <select id="settlementId" class="browser-default custom-select" disabled>
+            </select>
+          </div>
+        </div>
+        <div class="right">
+          <div class="form-group">
+            <label for="street">Улица</label>
+            <input type="text" class="form-control" id="street">
+          </div>
+          <div class="form-group">
+            <label for="house">Дом</label>
+            <input type="text" class="form-control" id="house">
+          </div>
+          <div class="form-group">
+            <label for="apartment">Квартира</label>
+            <input type="text" class="form-control" id="apartment">
+          </div>
+        </div>
+        <center><a id="buttonSearch" class="btn btn-primary">Искать</a></center>
+      </form>
+      <div id="resultSearch" class="central">
       </div>
     </div>
   </body>
