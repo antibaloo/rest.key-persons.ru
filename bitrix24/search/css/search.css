@@ -15,6 +15,7 @@ html, body {
 }
 .central{
   width: 100%;
+  clear: both;
   padding: 0px 5px 0px 5px;
 }
 .left{
