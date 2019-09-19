@@ -11,7 +11,7 @@ if ($_POST['settlementId'])  $data['settlementId'] = $_POST['settlementId'];
 if ($_POST['street'])  $data['street'] = $_POST['street'];
 if ($_POST['house']) $data['house'] = $_POST['house'];
 if ($_POST['apartment'])  $data['apartment'] = $_POST['apartment'];
-$queryUrl = 'https://rosreestr.ru/api/online/address/fir_objects?'.http_build_query($data);
+$queryUrl = 'https://rosreestr.ru/api/online/address/fir_objects?'.http_build_query($data,'','&',PHP_QUERY_RFC3986);
 
 
 curl_setopt_array($curl, array(
@@ -24,10 +24,10 @@ $objectList = json_decode(curl_exec($curl), true);
 curl_close($curl);
 $objects = array();
 foreach ($objectList as $key=>$value){
-  if ($value['srcObject'] == 1){
+  /*if ($value['srcObject'] == 1){
     unset($objectList[$key]);
     continue;
-  }
+  }*/
   $curl = curl_init();
   $queryUrl = 'https://rosreestr.ru/api/online/fir_object/'.$value['objectId'];
   curl_setopt_array($curl, array(
