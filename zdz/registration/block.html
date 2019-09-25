@@ -1,2 +1,47 @@
-<section class="landing-block">
-</section>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/registration.css" rel="stylesheet">
+  </head>
+  <body>
+    <section class="landing-block myBackGround">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div id="agreementCheckForm">
+              <input type="hidden" id="step" value="1">
+              <input type="hidden" id="leadId">
+              <div id="headerDiv" class="formBorder">
+                <center><span class="formHeader">РЕГИСТРАЦИЯ СОГЛАСИЯ</span></center>
+                <span id="formDescription" class="formDescription">Для бесплатной диагностики зрения вашего ребенка зарегистрируйте свое письменное согласие, указав код активации.</span>
+              </div>
+              <div class="formBorder">
+                <div id="agreementDiv" class="form-group">
+                  <label for="agreementId"><span class="inputLabel">Введите код активации согласия: </span><span class="red"><sup>*</sup> (латинскими буквами)</span></label>
+                  <input type="text" class="form-control inputUppercase" id="agreementId">
+                </div>
+                <div id="phoneDiv" class="form-group">
+                  <label for="phoneNumber"><span class="inputLabel">Введите номер телефона: </span><span class="red"><sup>*</sup> без восьмерки </span></label>
+                  <input type="text" class="form-control" id="phoneNumber">
+                </div>
+                <div id="snilsDiv" class="form-group">
+                  <label for="snils"><span class="inputLabel">Введите код СНИЛС: </span><span class="red"><sup>*</sup> без дефисов</span></label>
+                  <input type="text" class="form-control" id="snils">
+                </div>
+                <div id="resultCheck">&nbsp;</div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="js/registration.js"></script>
+  <script src="js/jquery.maskedinput.min.js"></script>
+</html>

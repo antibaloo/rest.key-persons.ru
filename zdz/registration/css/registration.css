@@ -1,0 +1,56 @@
+.container, .row {
+  height: 100%;
+  min-height: 100%;
+}
+#phoneDiv{
+  display: none;
+}
+#snilsDiv{
+  display: none;
+}
+html, body {
+  height: 100%;
+}
+#agreementId{
+  text-transform:uppercase
+}
+.myBackGround{
+  background-color: #00BFFF;
+  background-size: cover;
+  padding-top:15px;
+  padding-bottom:15px;
+  height: 100vh;
+  }
+.formBorder{
+  border: 1px solid #e0eded;
+  padding:20px 10px 20px 10px;
+}
+.formHeader{
+  font: bold 22px "PT Sans",sans-serif;
+}
+.formDescription{
+  font: 12px "PT Sans",sans-serif;
+}
+.red{
+  color: red;
+}
+.inputLabel{
+  font: 14px "PT Sans",sans-serif;
+}
+.bCenter{
+  margin: 0 auto;
+  text-align: center;
+  vertical-align:middle;
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+}
+#agreementCheckForm{
+  color: black;
+  margin: 0 auto;
+  padding: 10px;
+  background:white;
+  width: 100%;
+}
+#resultCheck{
+/*  height: 70px;*/
+}
