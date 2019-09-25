@@ -35,7 +35,7 @@ $("#agreementId").on('keyup', function(){
          }
        },
        error: function (data) {
-         $("#resultCheck").html("<span style='color:red;'>Фатальная ошибка: братитесь к администратору!</span>");
+         $("#resultCheck").html("<span style='color:red;'>Фатальная ошибка: обратитесь к администратору!</span>");
        },
      });
   }
