@@ -1,0 +1,10 @@
+.container, .row {
+  height: 100%;
+  min-height: 100%;
+}
+.myBackGround{
+  background-color: #00BFFF;
+  background-size: cover;
+  padding-top:15px;
+  padding-bottom:15px;
+}
