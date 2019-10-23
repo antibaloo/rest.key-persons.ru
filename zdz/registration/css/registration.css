@@ -1,56 +1,73 @@
-.container, .row {
-  height: 100%;
-  min-height: 100%;
-}
-#phoneDiv{
-  display: none;
-}
-#snilsDiv{
-  display: none;
-}
-html, body {
-  height: 100%;
-}
-#agreementId{
-  text-transform:uppercase
-}
-.myBackGround{
-  background-color: #00BFFF;
-  background-size: cover;
-  padding-top:15px;
-  padding-bottom:15px;
-  height: 100vh;
-  }
-.formBorder{
-  border: 1px solid #e0eded;
-  padding:20px 10px 20px 10px;
-}
-.formHeader{
-  font: bold 22px "PT Sans",sans-serif;
-}
-.formDescription{
-  font: 12px "PT Sans",sans-serif;
-}
-.red{
-  color: red;
-}
-.inputLabel{
-  font: 14px "PT Sans",sans-serif;
-}
-.bCenter{
-  margin: 0 auto;
-  text-align: center;
-  vertical-align:middle;
-  padding-left: 0px!important;
-  padding-right: 0px!important;
-}
-#agreementCheckForm{
-  color: black;
-  margin: 0 auto;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+.myBackGround {
+  background-color: #2980b9;
+  background-image: linear-gradient(45deg, #20638f, #3498db);
+  background-size: 100%;
+  background-position: 0 0;
+  background-attachment: fixed;
   padding: 10px;
-  background:white;
-  width: 100%;
+  height: 100vh;
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-#resultCheck{
-/*  height: 70px;*/
+
+input::-webkit-input-placeholder {
+  color: #8bc4ea !important;
+}
+
+input:-moz-placeholder {
+  color: #8bc4ea !important;
+}
+
+input::-moz-placeholder {
+  color: #8bc4ea !important;
+}
+
+input:-ms-input-placeholder {
+  color: #8bc4ea !important;
+}
+
+.container {
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container p {
+  font-size: 24px;
+  font-weight: 100;
+}
+.container h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+.inputs{
+  align-items: center;
+}
+.inputs{
+  line-height: 100%;
+  color: white;
+  font-size: 60px;
+}
+.inputs input{
+  width: 50px;
+  height: 60px;
+  line-height: 100%;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 60px;
+  word-spacing: 0px;
+  overflow: hidden;
+  text-align: center;
+  text-transform:uppercase;
+}
+#phoneH2, #phoneDiv, #snilsH2, #snilsDiv, #success, #reload {
+  display: none;
 }
