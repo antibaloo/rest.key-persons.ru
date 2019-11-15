@@ -6,54 +6,57 @@
     <link href="css/registration.css" rel="stylesheet">
   </head>
   <body>
+    <div id="width"></div>
+    <div id="height"></div>
     <section class="landing-block myBackGround">
-      <div class="container">
+      <div class="myContainer">
         <input type="hidden" id="step" value="1">
         <input type="hidden" id="leadId">
-        <h2 id="agreementH2">Код активации латинскими буквами:</h2>
+        <h2 id="agreementH2">Код регистрации латинскими буквами:</h2>
         <div id="agreementDiv" class="inputs">
-          <input id="firstCode" class="code" maxlength="2" placeholder="•" value=""/>
-          <input class="code" maxlength="2" placeholder="•" value=""/>
-          <input class="code" maxlength="2" placeholder="•" value=""/>
-          <input class="code" maxlength="2" placeholder="•" value=""/>
-          <input class="code" maxlength="2" placeholder="•" value=""/>
-          <input id="lastCode" class="code" maxlength="1" placeholder="•" value=""/>
+          <input id="firstCode" type="text" class="code" maxlength="2" placeholder="•" value=""/>
+          <input type="text" class="code" maxlength="2" placeholder="•" value=""/>
+          <input type="text" class="code" maxlength="2" placeholder="•" value=""/>
+          <input type="text" class="code" maxlength="2" placeholder="•" value=""/>
+          <input type="text" class="code" maxlength="2" placeholder="•" value=""/>
+          <input id="lastCode" type="text" class="code" maxlength="1" placeholder="•" value=""/>
         </div>
-        <h2 id="phoneH2">SMS отчет с результатами скрининга</h2>
+        <h2 id="phoneH2">СМС-отчет с результатами скрининга</h2>
         <div id="phoneDiv" class="inputs">
           +7 (
-          <input id="firstPhone" class="phone" maxlength="2" placeholder="•" value=""/>
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
+          <input id="firstPhone" type="number" class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
           )
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
           -
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
           -
-          <input class="phone" maxlength="2" placeholder="•" value=""/>
-          <input id="lastPhone" class="phone" maxlength="1" placeholder="•" value=""/>
+          <input type="number" class="phone" maxlength="2" placeholder="•" value=""/>
+          <input id="lastPhone" type="number" class="phone" maxlength="1" placeholder="•" value=""/>
         </div>
         <h2 id="snilsH2">Завершаем. СНИЛС ребенка:</h2>
         <div id="snilsDiv" class="inputs">
-          <input id="firstSnils" class="snils" maxlength="2" placeholder="•" value=""/>
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
+          <input id="firstSnils" type="number" class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
           -
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
           -
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
+          <input type="number" class="snils" maxlength="2" placeholder="•" value=""/>
           &nbsp;
-          <input class="snils" maxlength="2" placeholder="•" value=""/>
-          <input id="lastSnils" class="snils" maxlength="1" placeholder="•" value=""/>
+          <input type="number"class="snils" maxlength="2" placeholder="•" value=""/>
+          <input id="lastSnils" type="number" class="snils" maxlength="1" placeholder="•" value=""/>
         </div>
-        <h2 id="success">Спасибо, Ваше согласие активировано</h2>
-        <button id="reload">Активировать еще одно</button>
+        <h2 id="success">Спасибо, Ваше согласие зарегистрировано</h2>
+        <button id="reload">Зарегистрировать еще одно</button>
         <div id="resultCheck">&nbsp;</div>
         <input type="hidden" id="agreementId">
         <input type="hidden" id="phoneNumber">
@@ -63,4 +66,19 @@
   </body>
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="js/registration.js"></script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                             m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+    ym(56221210, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/56221210" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 </html>

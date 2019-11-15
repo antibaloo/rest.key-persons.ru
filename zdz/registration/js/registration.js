@@ -1,5 +1,15 @@
+/*var f = $('#block5252');
+$(window).scroll(function() {
+  if (navigator.platform.indexOf("iPhone") !== -1){
+    var w = $(this);
+    if (w.scrollTop() > (f.offset().top - w.height())) location.href = 'https://rest.key-persons.ru/zdz/registration/block.html';
+  }
+});*/
 $(document).ready(function(){
-  $("#firstCode").focus();
+  //$("#firstCode").focus();
+  //$("#width").html("Ширина "+$(window).width());
+  //$("#height").html("Высота "+$(window).height());
+ //$("#resultCheck").html(navigator.platform);
 });
 $("#reload").on('click',function(){
   location.reload();
@@ -61,6 +71,7 @@ $("#lastPhone").on('keyup',function(){
   }
 });
 $("#lastSnils").on('keyup',function(){
+  $('#lastSnils').attr('readonly', true);
   var snils="";
   if ($(this).val().length>0){
     $(".snils").each(function(){
@@ -94,7 +105,10 @@ $("#lastSnils").on('keyup',function(){
         $("#resultCheck").html("<span style='color:red;'>Фатальная ошибка: братитесь к администратору!</span>");
       },
     });
+  }else{
+    $('#lastSnils').attr('readonly', false);
   }
+  
 });    
 function processInputDigits(holder){
   var elements = holder.children(), //taking the "kids" of the parent

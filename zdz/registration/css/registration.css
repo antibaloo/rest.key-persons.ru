@@ -5,32 +5,89 @@
   background-size: 100%;
   background-position: 0 0;
   background-attachment: fixed;
-  padding: 10px;
   height: 100vh;
   color: #fff;
   font-family: "Open Sans", sans-serif;
-  box-sizing: border-box;
+  box-sizing: border-box;*/
   overflow: hidden;
 }
 
-input::-webkit-input-placeholder {
+.inputs input::-webkit-input-placeholder {
+  -webkit-appearance: none; 
   color: #8bc4ea !important;
 }
 
-input:-moz-placeholder {
+.inputs input:-moz-placeholder {
   color: #8bc4ea !important;
 }
 
-input::-moz-placeholder {
+.inputs input:-ms-input-placeholder {
   color: #8bc4ea !important;
 }
-
-input:-ms-input-placeholder {
-  color: #8bc4ea !important;
+.myContainer h2 {
+  color: white;
+  font-size: 4vw;
+  text-align: center;
+}
+.inputs{
+  align-items: center;
+}
+.inputs{
+  line-height: 100%;
+  color: white;
+  font-size: 4vw;
+}
+.inputs input{
+  width: 4vw;
+  height: 5vw;
+  line-height: 100%;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 4vw;
+  word-spacing: 0px;
+  overflow: hidden;
+  text-align: center;
+  text-transform:uppercase;
+}
+.inputs input[type=number]::-webkit-inner-spin-button, 
+.inputs input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
-.container {
-  width: 90%;
+@media screen and (max-width: 650px) {
+  #agreementH2{
+    font-size: 5vw;
+  }
+  .inputs{
+    font-size: 6vw;
+  }
+  .inputs input{
+    font-size: 7vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  #agreementDiv.inputs{
+    font-size: 0;
+  }
+  #agreementH2{
+    font-size: 7vw;
+  }
+  #agreementDiv.inputs{
+    font-size: 10vw; /*12*/
+  }
+  #agreementDiv.inputs input{
+    font-size: 10; /*12*/
+  }
+  #agreementDiv.inputs input{
+    width: 10vw; /*12*/
+    height: 10vw; /*12*/
+  }
+}
+.myContainer {
+  width: 100%;
   height: 100vh;
   margin: 0 auto;
   display: flex;
@@ -38,36 +95,41 @@ input:-ms-input-placeholder {
   justify-content: center;
   align-items: center;
 }
-.container p {
+.myContainer p {
   font-size: 24px;
   font-weight: 100;
 }
-.container h1 {
+.myContainer h1 {
   font-size: 32px;
   font-weight: 600;
 }
-.inputs{
-  align-items: center;
-}
-.inputs{
-  line-height: 100%;
-  color: white;
-  font-size: 60px;
-}
-.inputs input{
-  width: 50px;
-  height: 60px;
-  line-height: 100%;
-  background-color: transparent;
-  border: 0;
-  outline: 0;
-  color: white;
-  font-size: 60px;
-  word-spacing: 0px;
-  overflow: hidden;
-  text-align: center;
-  text-transform:uppercase;
-}
 #phoneH2, #phoneDiv, #snilsH2, #snilsDiv, #success, #reload {
   display: none;
+}
+#resultCheck{
+  margin: 5px;
+  text-align: center;
+}
+#reload {
+  margin-top: 15px;
+  cursor: pointer;
+  min-width: 200px;
+  padding: 15px 5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  background: #ffffff;
+  border: none;
+  color: #2980b9;
+  font-weight: 600;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(150,150,150);
+  transition: all 1s;
+}
+
+#reload:hover {
+  box-shadow: 0 0 25px rgb(255,255,255);
+}
+
+#reload:focus {
+  outline: none;
 }
