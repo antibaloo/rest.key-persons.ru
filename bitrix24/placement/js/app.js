@@ -1,4 +1,4 @@
-var $placements;
+var placements;
 $(document).ready(function(){
   BX24.callMethod(
     'placement.list',{
@@ -18,7 +18,7 @@ $(document).ready(function(){
     function(result){
       if(result.error()) console.error(result.error());
       else {
-        var placements = result.data();
+        placements = result.data();
         console.log(placements);
         $.each(placements,function(index, value){
           $("#placementSelector").append('<option value='+index+'>'+value.title+'</option>');
@@ -28,12 +28,13 @@ $(document).ready(function(){
   );
 });
 $('#placementSelector').on('change', function() {
+
   if (this.value == 'undefined') document.getElementById("placementForm").reset();
   else {
-    $("#titlePlacement").val($placements[this.value].title);
-    $("#handlerPlacement").val($placements[this.value].handler);
-    $("#placementPlacement option[value=" + $placements[this.value].placement + "]").attr('selected', 'true');
-    $("#descriptionPlacement").val($placements[this.value].description);
+    $("#titlePlacement").val(placements[this.value].title);
+    $("#handlerPlacement").val(placements[this.value].handler);
+    $("#placementPlacement option[value=" + placements[this.value].placement + "]").attr('selected', 'true');
+    $("#descriptionPlacement").val(placements[this.value].description);
   }
 });
 $('.btn').on('click', function (){
