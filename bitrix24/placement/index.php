@@ -28,7 +28,7 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/placement/css/app.css?ver=0.0.1">
+    <link rel="stylesheet" href="/bitrix24/placement/css/app.css?ver=0.0.1">
   </head>
   <body>
     <div id="app" class="container-fluid">
@@ -68,6 +68,6 @@ if ($user['result']['ID']<>1) die("У вас нет прав для работы
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//api.bitrix24.com/api/v1/dev/"></script>
-    <script src="/placement/js/app.js?ver=<?=time()?>"></script>
+    <script src="/bitrix24/placement/js/app.js?ver=<?=time()?>"></script>
   </body>
 </html>
