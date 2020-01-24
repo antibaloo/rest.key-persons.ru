@@ -187,7 +187,7 @@
       $queryData = http_build_query(
         array( 
           'order' => array("ID"=>"DESC"),
-          'filter' => array("CATEGORY_ID" => 8,"UF_CRM_5ABC6DAD6F1EC"=>"AAATDG"),
+          'filter' => array("CATEGORY_ID" => 8,"UF_CRM_5ABC6DAD6F1EC"=>$replay['result'][0]['UF_CRM_5ABC6DAD6F1EC']),
           'select' => array(
             "ID", "BEGINDATE"
           )
