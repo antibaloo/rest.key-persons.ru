@@ -26,7 +26,8 @@ $(document).ready(function(){
       }
     },
     error: function (data) {
-      $("#results").html("<center><h1 style='color:red;'>Фатальная ошибка: обратитесь к администратору!</h1></center");
+      ym(57468781, 'reachGoal', 'fatalError');
+      $("#results").html("<center><h1 style='color:green;'>На сайте ведутся техничекие работы. Повторите попытку позднее.</h1></center");
     },
   });
   $("#toPDF").on('click','#printPDF',function(){
