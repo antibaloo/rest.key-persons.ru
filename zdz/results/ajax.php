@@ -254,7 +254,7 @@
   </div>
   <div class="block-result-test">
     <div><?=$replay['result'][0]['UF_CRM_1550760923']?></div>
-    <div id="printPDF" class="block-result-test_bottom text-center">ПОВЕРКА ФБУ РОСТЕСТ МОСКВА №СП2574020</div>
+    <div id="printPDF" class="block-result-test_bottom text-center">Свидетельство о поверке №9/9-36-2020 от 03.02.2020г ФБУ "ОРЕНБУРГСКИЙ ЦСМ"</div>
     <!--<div style="display:none" class="block-info text-center">
       <button id="printPDF">Печать результатов</button>
       <a href="https://rest.key-persons.ru/zdz/results/makepdf.php?agreementId=<?=$_POST['agreementId']?>&dealId=<?=$_POST['dealId']?>" target="_blanc">Скачать отчет</a>
