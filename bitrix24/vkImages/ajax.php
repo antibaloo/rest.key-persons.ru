@@ -28,6 +28,8 @@ if(isset($_POST['my_file_upload'])){
       $post_data[] = new CurlFile(realpath("$uploaddir/$file_name"));//Данные для отправки файлов в вк
 		}
 	}
+  
+  
   // получаем урл для загрузки
   $url = file_get_contents("https://api.vk.com/method/photos.getUploadServer?album_id=".$album_id."&group_id=".$group_id."&v=".$v."&access_token=".$token);
   $url = json_decode($url)->response->upload_url;
