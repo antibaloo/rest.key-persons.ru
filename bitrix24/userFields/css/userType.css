@@ -32,7 +32,7 @@ html, body {
   border: 1px solid white;
 }
 .userField:hover{
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   cursor: pointer;
 }
 .userField{
