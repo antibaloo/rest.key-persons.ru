@@ -36,7 +36,7 @@ function loadLeadUserFieldsList(){
 }
 //Очистить форму пользовательского поля лида
 function clearLeadUserFieldForm(){
-  $("#leadUserFieldsList").find(".userField").each(function(){$(this).css("border","1px solid white");});
+  $("#leadUserFieldsList").find("li").each(function(){$(this).css("border","1px solid white");});
   $("#leadFieldId").val("");
   $("#leadFieldName").val("");
   $("#leadFieldName").prop("readonly", false);
@@ -45,6 +45,7 @@ function clearLeadUserFieldForm(){
   $('#leadFieldMultiple').prop('checked', false);
   $("#leadFieldType").val("");
   $("#addLeadUserField").html("Добавить");
+  $("#deleteLeadUserField").addClass("disabled");
 }
 //Очистка списка полей сделки
 function clearDealUserFieldsList(){
@@ -93,6 +94,7 @@ function clearDealUserFieldForm(){
   $('#dealFieldMultiple').prop('checked', false);
   $("#dealFieldType").val("");
   $("#addDealUserField").html("Добавить");
+  $("#deleteDealUserField").addClass("disabled");
 }
 //Очистка списка типов пользовательских полей
 function clearUserFieldTypes (){
@@ -144,6 +146,7 @@ BX24.ready(function(){
       if ($(this).attr("fieldmandatory") == "Y") $('#leadFieldMandatory').prop('checked', true);
       if ($(this).attr("fieldmultiple") == "Y") $('#leadFieldMultiple').prop('checked', true);
       $("#leadFieldType").val($(this).attr("usertypeid"));
+      $("#deleteLeadUserField").removeClass("disabled");
     });
     //Выбор существующего пользовательского поля сделки
     $("#dealUserFieldsList").on("click", ".userField",function(){
@@ -159,6 +162,7 @@ BX24.ready(function(){
       if ($(this).attr("fieldmandatory") == "Y") $('#dealFieldMandatory').prop('checked', true);
       if ($(this).attr("fieldmultiple") == "Y") $('#dealFieldMultiple').prop('checked', true);
       $("#dealFieldType").val($(this).attr("usertypeid"));
+      $("#deleteDealUserField").removeClass("disabled");
     });
     //Очистить форму пользовательского поля лида
     $("#clearLeadUserField").on("click", function(){
@@ -179,7 +183,7 @@ BX24.ready(function(){
         "MULTIPLE" : $('#leadFieldMultiple').prop('checked') ? "Y":"N",
         "USER_TYPE_ID": $("#leadFieldType").val(),
       };
-      if (leadId.length >0){
+      if (leadId.length >0){//Обновляем существующее поле
         BX24.callMethod(
           "crm.lead.userfield.update",
           {
@@ -201,7 +205,7 @@ BX24.ready(function(){
             }
           }
         );
-      }else{
+      }else{//Создаем новое поле
         BX24.callMethod(
           "crm.lead.userfield.add",
           {
@@ -227,8 +231,8 @@ BX24.ready(function(){
     });
     //Сохранить пользовательское поле сделки
     $("#addDealUserField").on("click", function(){
-      var id = $("#dealFieldId").val();
-      var fields ={
+      var dealId = $("#dealFieldId").val();
+      var dealFields ={
         "FIELD_NAME": $("#dealFieldName").val(),
         "EDIT_FORM_LABEL": $("#dealFieldLabel").val(),
         "LIST_COLUMN_LABEL": $("#dealFieldLabel").val(),
@@ -236,7 +240,11 @@ BX24.ready(function(){
         "MULTIPLE" : $('#dealFieldMultiple').prop('checked') ? "Y":"N",
         "USER_TYPE_ID": $("#dealFieldType").val(),
       };
-      console.log(fields);
+      if (dealId.length >0){//Обновляем существующее поле
+        
+      }else{//Создаем новое поле
+        
+      }
     });
     //Загрузки списка пользовательских типов пользовательских полей
     BX24.callMethod(
