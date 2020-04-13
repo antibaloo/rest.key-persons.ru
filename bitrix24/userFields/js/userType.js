@@ -1,84 +1,135 @@
+//Очистка списка полей лида
+function clearLeadUserFieldsList(){
+  $("#leadUserFieldsList").find("li").remove();
+}
+//Загрузка списка полей лида
+function loadLeadUserFieldsList(){
+  BX24.callMethod(
+    "crm.lead.userfield.list", 	
+    { 
+      order: { "SORT": "ASC" },
+      filter: {}
+    }, 
+    function(result){
+      if(result.error()) console.error(result.error());
+      else{
+        result.data().forEach(function (field){
+          BX24.callMethod(
+            "crm.lead.userfield.get", 
+            {id: field.ID},
+            function(result){
+              var s = '';
+              s += '<b>' + result.query.method + '</b>\n';
+              s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+              if(result.error()){
+                s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+                $("#messages").html(s);
+              }else
+                $('#leadUserFieldsList').append('<li class="userField" entityid="'+field.ENTITY_ID+'" fieldid="'+field.ID+'" fieldname="'+field.FIELD_NAME+'" usertypeid="'+field.USER_TYPE_ID+'" fieldlabel="'+result.data().EDIT_FORM_LABEL.ru+'" fieldmandatory="'+field.MANDATORY+'" fieldmultiple="'+field.MULTIPLE+'">'+result.data().EDIT_FORM_LABEL.ru+'</li>');
+            }
+          );
+        });
+        if(result.more())	result.next();
+      }
+    }
+  );
+}
+//Очистить форму пользовательского поля лида
+function clearLeadUserFieldForm(){
+  $("#leadUserFieldsList").find(".userField").each(function(){$(this).css("border","1px solid white");});
+  $("#leadFieldId").val("");
+  $("#leadFieldName").val("");
+  $("#leadFieldName").prop("readonly", false);
+  $("#leadFieldLabel").val("");
+  $('#leadFieldMandatory').prop('checked', false);
+  $('#leadFieldMultiple').prop('checked', false);
+  $("#leadFieldType").val("");
+  $("#addLeadUserField").html("Добавить");
+}
+//Очистка списка полей сделки
+function clearDealUserFieldsList(){
+  $("#dealUserFieldsList").find("li").remove();
+}
+//Загрузка списка полей сделки
+function loadDealUserFieldsList(){
+  BX24.callMethod(
+    "crm.deal.userfield.list", 	
+    { 
+      order: { "SORT": "ASC" },
+      filter: {}
+    }, 
+    function(result){
+      if(result.error()) console.error(result.error());
+      else{
+        result.data().forEach(function (field){
+          BX24.callMethod(
+            "crm.deal.userfield.get", 
+            {id: field.ID},
+            function(result){
+              var s = '';
+              s += '<b>' + result.query.method + '</b>\n';
+              s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+              if(result.error()){
+                s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+                $("#messages").html(s);
+              }else
+                $('#dealUserFieldsList').append('<li class="userField" entityid="'+field.ENTITY_ID+'" fieldid="'+field.ID+'" fieldname="'+field.FIELD_NAME+'" usertypeid="'+field.USER_TYPE_ID+'" fieldlabel="'+result.data().EDIT_FORM_LABEL.ru+'" fieldmandatory="'+field.MANDATORY+'" fieldmultiple="'+field.MULTIPLE+'">'+result.data().EDIT_FORM_LABEL.ru+'</li>');
+            }
+          );
+        });
+        if(result.more())	result.next();
+      }
+    }
+  );
+}
+//Очистить форму пользовательского поля сделки
+function clearDealUserFieldForm(){
+  $("#dealUserFieldsList").find(".userField").each(function(){$(this).css("border","1px solid white");});
+  $("#dealFieldId").val("");
+  $("#dealFieldName").val("");
+  $("#dealFieldName").prop("readonly", false);
+  $("#dealFieldLabel").val("");
+  $('#dealFieldMandatory').prop('checked', false);
+  $('#dealFieldMultiple').prop('checked', false);
+  $("#dealFieldType").val("");
+  $("#addDealUserField").html("Добавить");
+}
+//Очистка списка типов пользовательских полей
+function clearUserFieldTypes (){
+  $("#leadFieldType").find("option").remove();
+  $("#dealFieldType").find("option").remove();
+}
+//Загрузка списка типов пользовательских полей
+function loadUserFieldTypes(){
+  BX24.callMethod(
+    'crm.userfield.types',
+    {},
+    function (result){
+      var s = '';
+      s += '<b>' + result.query.method + '</b>\n';
+      s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+      if(result.error()){
+        s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+        $("#messages").html(s);
+      }else{
+        $('#leadFieldType').append('<option value="" selected>выберите тип поля</option>');
+        $('#dealFieldType').append('<option value="" selected>выберите тип поля</option>');
+        result.data().forEach(function(item){
+          $('#leadFieldType').append('<option value="'+item.ID+'">'+item.title+'</option>');
+          $('#dealFieldType').append('<option value="'+item.ID+'">'+item.title+'</option>');
+        });
+      }
+    }
+  );
+}
 BX24.ready(function(){
   BX24.init(function(){
     //Загрузка списка типов пользовательских полей
-    BX24.callMethod(
-      'crm.userfield.types',
-      {},
-      function (result){
-        var s = '';
-        s += '<b>' + result.query.method + '</b>\n';
-        s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
-        if(result.error()){
-          s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
-          $("#messages").html(s);
-        }else{
-          result.data().forEach(function(item){
-            $('#leadFieldType').append('<option value="'+item.ID+'">'+item.title+'</option>');
-            $('#dealFieldType').append('<option value="'+item.ID+'">'+item.title+'</option>');
-          });
-        }
-      }
-    );
+    loadUserFieldTypes();
     //Загрузка списка пользовательских полей в лидах
-    BX24.callMethod(
-      "crm.lead.userfield.list", 	
-      { 
-        order: { "SORT": "ASC" },
-        filter: {}
-      }, 
-      function(result){
-        if(result.error()) console.error(result.error());
-        else{
-          result.data().forEach(function (field){
-            BX24.callMethod(
-              "crm.lead.userfield.get", 
-              {id: field.ID},
-              function(result){
-                var s = '';
-                s += '<b>' + result.query.method + '</b>\n';
-                s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
-                if(result.error()){
-                  s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
-                  $("#messages").html(s);
-                }else
-                  $('#leadUserFieldsList').append('<li class="userField" entityid="'+field.ENTITY_ID+'" fieldid="'+field.ID+'" fieldname="'+field.FIELD_NAME+'" usertypeid="'+field.USER_TYPE_ID+'" fieldlabel="'+result.data().EDIT_FORM_LABEL.ru+'" fieldmandatory="'+field.MANDATORY+'" fieldmultiple="'+field.MULTIPLE+'">'+result.data().EDIT_FORM_LABEL.ru+'</li>');
-              }
-            );
-          });
-          if(result.more())	result.next();
-        }
-      }
-    );
+    loadLeadUserFieldsList();
     //Загрузка списка пользовательских полей в сделках
-    BX24.callMethod(
-      "crm.deal.userfield.list", 	
-      { 
-        order: { "SORT": "ASC" },
-        filter: {}
-      }, 
-      function(result){
-        if(result.error()) console.error(result.error());
-        else{
-          result.data().forEach(function (field){
-            BX24.callMethod(
-              "crm.deal.userfield.get", 
-              {id: field.ID},
-              function(result){
-                var s = '';
-                s += '<b>' + result.query.method + '</b>\n';
-                s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
-                if(result.error()){
-                  s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
-                  $("#messages").html(s);
-                }else
-                  $('#dealUserFieldsList').append('<li class="userField" entityid="'+field.ENTITY_ID+'" fieldid="'+field.ID+'" fieldname="'+field.FIELD_NAME+'" usertypeid="'+field.USER_TYPE_ID+'" fieldlabel="'+result.data().EDIT_FORM_LABEL.ru+'" fieldmandatory="'+field.MANDATORY+'" fieldmultiple="'+field.MULTIPLE+'">'+result.data().EDIT_FORM_LABEL.ru+'</li>');
-              }
-            );
-          });
-          if(result.more())	result.next();
-        }
-      }
-    );
+    loadDealUserFieldsList();
     //Выбор существующего пользовательского поля лида
     $("#leadUserFieldsList").on("click", ".userField",function(){
       $("#leadUserFieldsList").find(".userField").each(function(){$(this).css("border","1px solid white");});
@@ -87,7 +138,8 @@ BX24.ready(function(){
       $(this).css("border","1px solid black");
       $("#addLeadUserField").html("Сохранить");
       $("#leadFieldId").val($(this).attr("fieldid"));
-      $("#leadFieldName").val($(this).attr("fieldname"));
+      $("#leadFieldName").val($(this).attr("fieldname").replace('UF_CRM_',''));
+      $("#leadFieldName").prop("readonly", true);
       $("#leadFieldLabel").val($(this).attr("fieldlabel"));
       if ($(this).attr("fieldmandatory") == "Y") $('#leadFieldMandatory').prop('checked', true);
       if ($(this).attr("fieldmultiple") == "Y") $('#leadFieldMultiple').prop('checked', true);
@@ -101,7 +153,8 @@ BX24.ready(function(){
       $("#addDealUserField").html("Сохранить");
       $(this).css("border","1px solid black");
       $("#dealFieldId").val($(this).attr("fieldid"));
-      $("#dealFieldName").val($(this).attr("fieldname"));
+      $("#dealFieldName").val($(this).attr("fieldname").replace('UF_CRM_',''));
+      $("#dealFieldName").prop("readonly", true);
       $("#dealFieldLabel").val($(this).attr("fieldlabel"));
       if ($(this).attr("fieldmandatory") == "Y") $('#dealFieldMandatory').prop('checked', true);
       if ($(this).attr("fieldmultiple") == "Y") $('#dealFieldMultiple').prop('checked', true);
@@ -109,33 +162,81 @@ BX24.ready(function(){
     });
     //Очистить форму пользовательского поля лида
     $("#clearLeadUserField").on("click", function(){
-      $("#leadUserFieldsList").find(".userField").each(function(){$(this).css("border","1px solid white");});
-      $("#leadFieldId").val("");
-      $("#leadFieldName").val("");
-      $("#leadFieldLabel").val("");
-      $('#leadFieldMandatory').prop('checked', false);
-      $('#leadFieldMultiple').prop('checked', false);
-      $("#leadFieldType").val("");
-      $("#addLeadUserField").html("Добавить");
+      clearLeadUserFieldForm();
     })
     //Очистить форму пользовательского поля сделки
     $("#clearDealUserField").on("click", function(){
-      $("#dealUserFieldsList").find(".userField").each(function(){$(this).css("border","1px solid white");});
-      $("#dealFieldId").val("");
-      $("#dealFieldName").val("");
-      $("#dealFieldLabel").val("");
-      $('#dealFieldMandatory').prop('checked', false);
-      $('#dealFieldMultiple').prop('checked', false);
-      $("#dealFieldType").val("");
-      $("#addDealUserField").html("Добавить");
+      clearDealUserFieldForm();
     })
     //Сохранить пользовательское поле лида
     $("#addLeadUserField").on("click", function(){
-      
+      var leadId = $("#leadFieldId").val();
+      var leadFields ={
+        "FIELD_NAME": $("#leadFieldName").val(),
+        "EDIT_FORM_LABEL": $("#leadFieldLabel").val(),
+        "LIST_COLUMN_LABEL": $("#leadFieldLabel").val(),
+        "MANDATORY" : $('#leadFieldMandatory').prop('checked') ? "Y":"N",
+        "MULTIPLE" : $('#leadFieldMultiple').prop('checked') ? "Y":"N",
+        "USER_TYPE_ID": $("#leadFieldType").val(),
+      };
+      if (leadId.length >0){
+        BX24.callMethod(
+          "crm.lead.userfield.update",
+          {
+            id: leadId,
+            fields: leadFields
+          },
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearLeadUserFieldForm();
+              clearLeadUserFieldsList();
+              loadLeadUserFieldsList();
+              $("#messages").html("Поле сохранено!!!");
+            }
+          }
+        );
+      }else{
+        BX24.callMethod(
+          "crm.lead.userfield.add",
+          {
+            fields: leadFields
+          },
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearLeadUserFieldForm();
+              clearLeadUserFieldsList();
+              loadLeadUserFieldsList();
+              $("#messages").html("Поле добавлено!!!");
+            }
+          }
+        );
+      }
+      //console.log(leadFields);
     });
     //Сохранить пользовательское поле сделки
     $("#addDealUserField").on("click", function(){
-      
+      var id = $("#dealFieldId").val();
+      var fields ={
+        "FIELD_NAME": $("#dealFieldName").val(),
+        "EDIT_FORM_LABEL": $("#dealFieldLabel").val(),
+        "LIST_COLUMN_LABEL": $("#dealFieldLabel").val(),
+        "MANDATORY" : $('#dealFieldMandatory').prop('checked') ? "Y":"N",
+        "MULTIPLE" : $('#dealFieldMultiple').prop('checked') ? "Y":"N",
+        "USER_TYPE_ID": $("#dealFieldType").val(),
+      };
+      console.log(fields);
     });
     //Загрузки списка пользовательских типов пользовательских полей
     BX24.callMethod(
