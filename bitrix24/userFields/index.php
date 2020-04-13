@@ -39,7 +39,7 @@
             <select id="leadFieldType" class="browser-default custom-select"></select>
           </div>
         </div>
-        <center><a id="addLeadUserField" class="btn btn-primary">Добавить</a>&nbsp;<a id="clearLeadUserField" class="btn btn-warning">Отмена</a></center>
+        <center><a id="addLeadUserField" class="btn btn-primary">Добавить</a>&nbsp;<a id="clearLeadUserField" class="btn btn-warning">Отмена</a>&nbsp;<a id="deleteLeadUserField" class="btn btn-danger disabled">Удалить</a></center>
       </div>
       <div class="right">
         <h5>Список пользовательских полей в сделках:</h5>
@@ -70,7 +70,7 @@
             <select id="dealFieldType" class="browser-default custom-select"></select>
           </div>
         </div>
-        <center><a id="addDealUserField" class="btn btn-primary">Добавить</a>&nbsp;<a id="clearDealUserField" class="btn btn-warning">Отмена</a></center>
+        <center><a id="addDealUserField" class="btn btn-primary">Добавить</a>&nbsp;<a id="clearDealUserField" class="btn btn-warning">Отмена</a>&nbsp;<a id="deleteDealUserField" class="btn btn-danger disabled">Удалить</a></center>
       </div>
       <div class="central">
         <h5>Список пользовательских типов полей:</h5>
