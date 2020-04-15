@@ -227,7 +227,6 @@ BX24.ready(function(){
           }
         );
       }
-      //console.log(leadFields);
     });
     //Сохранить пользовательское поле сделки
     $("#addDealUserField").on("click", function(){
@@ -241,10 +240,107 @@ BX24.ready(function(){
         "USER_TYPE_ID": $("#dealFieldType").val(),
       };
       if (dealId.length >0){//Обновляем существующее поле
-        
+        BX24.callMethod(
+          "crm.deal.userfield.update",
+          {
+            id: dealId,
+            fields: dealFields
+          },
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearDealUserFieldForm();
+              clearDealUserFieldsList();
+              loadDealUserFieldsList();
+              $("#messages").html("Поле сохранено!!!");
+            }
+          }
+        );        
       }else{//Создаем новое поле
-        
+        BX24.callMethod(
+          "crm.deal.userfield.add",
+          {
+            fields: dealFields
+          },
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearDealUserFieldForm();
+              clearDealUserFieldsList();
+              loadDealUserFieldsList();
+              $("#messages").html("Поле добавлено!!!");
+            }
+          }
+        );        
       }
+    });
+    //Удалить пользовательское поле лида
+    $("#deleteLeadUserField").on("click", function(){
+      var leadId = $("#leadFieldId").val();
+      if (leadId.length >0){//Если есть выбраное поле
+        var yes2Delete = confirm("Вы действительно хотите удалить поле '"+$("#leadFieldLabel").val()+"'?");
+        if (yes2Delete){
+          BX24.callMethod(
+            "crm.lead.userfield.delete",
+            {
+              id: leadId
+            },
+            function(result){
+              var s = '';
+              s += '<b>' + result.query.method + '</b>\n';
+              s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+              if(result.error()){
+                s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+                $("#messages").html(s);
+              }else{
+                clearLeadUserFieldForm();
+                clearLeadUserFieldsList();
+                loadLeadUserFieldsList();
+                $("#messages").html("Поле удалено!!!");
+              }
+            }
+          ); 
+        }
+      }
+    });
+    //Удалить пользовательское поле сделки
+    $("#deleteDealUserField").on("click", function(){
+      var dealId = $("#dealFieldId").val();
+      if (dealId.length >0){//Если есть выбраное поле
+        var yes2Delete = confirm("Вы действительно хотите удалить поле '"+$("#dealFieldLabel").val()+"'?");
+        if (yes2Delete){
+          BX24.callMethod(
+            "crm.deal.userfield.delete",
+            {
+              id: dealId
+            },
+            function(result){
+              var s = '';
+              s += '<b>' + result.query.method + '</b>\n';
+              s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+              if(result.error()){
+                s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+                $("#messages").html(s);
+              }else{
+                clearDealUserFieldForm();
+                clearDealUserFieldsList();
+                loadDealUserFieldsList();
+                $("#messages").html("Поле удалено!!!");
+              }
+            }
+          ); 
+        }
+      }      
     });
     //Загрузки списка пользовательских типов пользовательских полей
     BX24.callMethod(
