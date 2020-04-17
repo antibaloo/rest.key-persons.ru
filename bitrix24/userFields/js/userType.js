@@ -446,5 +446,33 @@ BX24.ready(function(){
         }
       }      
     });
+    //Удалить пользовательский тип
+    $("#deleteUserType").on("click", function(){
+      var yes2Delete = confirm("Вы действительно хотите удалить пользовательский тип '"+$("#title").val()+"'?");
+      if (yes2Delete){
+        BX24.callMethod(
+          'userfieldtype.delete', 
+          {
+            USER_TYPE_ID: $("#userTypeId").val()
+          },
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearUserTypeForm();
+              clearUserTypesList();
+              loadUserTypesList();
+              clearUserFieldTypes();
+              loadUserFieldTypes();
+              $("#messages").html("Тип удалён!!!");
+            }
+          }
+        );
+      }
+    });
   })
 });
