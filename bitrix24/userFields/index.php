@@ -75,6 +75,7 @@
       <div class="central">
         <h5>Список пользовательских типов полей:</h5>
         <div id="userTypesHandlers">
+          <ul id="userTypesList"></ul>
           <div class="form-group">
             <label for="userTypeId">Строковый код типа</label>
             <input type="text" id="userTypeId" class="form-control latinOnly">
