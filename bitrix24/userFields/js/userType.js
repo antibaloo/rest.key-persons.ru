@@ -141,7 +141,13 @@ function loadUserTypes(){
 }
 //Очистка формы пользовательских типов
 function clearUserTypeForm(){
-  
+  $("#userTypesList").find(".userField").each(function(){$(this).css("border","1px solid white");});
+  $("#userTypeId").val("");
+  $("#handler").val("");
+  $("#title").val("");
+  $("#description").val("");
+  $("#addUserType").html("Добавить");
+  $("#deleteUserType").addClass("disabled");
 }
 
 BX24.ready(function(){
@@ -192,6 +198,11 @@ BX24.ready(function(){
     $("#clearDealUserField").on("click", function(){
       clearDealUserFieldForm();
     })
+    //Очистить форму пользовательского типа
+    $("#clearUserType").on("click", function(){
+      clearUserTypeForm();
+    })    
+
     //Сохранить пользовательское поле лида
     $("#addLeadUserField").on("click", function(){
       var leadId = $("#leadFieldId").val();
