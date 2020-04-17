@@ -92,7 +92,7 @@
             <input type="text" id="description" class="form-control">
           </div>
         </div>
-        <center><a id="addUserType" class="btn btn-primary">Добавить</a>&nbsp;<a id="clearUserType" class="btn btn-warning">Очистить</a></center>
+        <center><a id="addUserType" class="btn btn-primary">Добавить</a>&nbsp;<a id="clearUserType" class="btn btn-warning">Очистить</a>&nbsp;<a id="deleteuserType" class="btn btn-danger disabled">Удалить</a></center>
       </div>
       <div id="messages" class="central"></div>
     </div>
