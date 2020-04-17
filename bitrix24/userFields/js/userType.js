@@ -120,10 +120,30 @@ function loadUserFieldTypes(){
           $('#leadFieldType').append('<option value="'+item.ID+'">'+item.title+'</option>');
           $('#dealFieldType').append('<option value="'+item.ID+'">'+item.title+'</option>');
         });
+        if(result.more())	result.next();
       }
     }
   );
 }
+//Очистка списка пользовательских типов
+function clearUserTypes(){
+  $("#userTypesList").find("li").remove();
+}
+//Загрузка списка пользовательских типов
+function loadUserTypes(){
+  BX24.callMethod(
+    'userfieldtype.list', 
+    {}, 
+    function(result){
+      console.log(result.data());
+    }
+  );
+}
+//Очистка формы пользовательских типов
+function clearUserTypeForm(){
+  
+}
+
 BX24.ready(function(){
   BX24.init(function(){
     //Загрузка списка типов пользовательских полей
@@ -342,14 +362,5 @@ BX24.ready(function(){
         }
       }      
     });
-    //Загрузки списка пользовательских типов пользовательских полей
-    BX24.callMethod(
-      'userfieldtype.list', 
-      {}, 
-      function(result){
-        console.log(result.data());
-      }
-    );
-    
   })
 });
