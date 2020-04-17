@@ -126,16 +126,22 @@ function loadUserFieldTypes(){
   );
 }
 //Очистка списка пользовательских типов
-function clearUserTypes(){
+function clearUserTypesList(){
   $("#userTypesList").find("li").remove();
 }
 //Загрузка списка пользовательских типов
-function loadUserTypes(){
+function loadUserTypesList(){
   BX24.callMethod(
     'userfieldtype.list', 
     {}, 
     function(result){
-      console.log(result.data());
+      if(result.error()) console.error(result.error());
+      else{
+        result.data().forEach(function (type){
+          $('#userTypesList').append('<li class="userField" usertypeid="'+type.USER_TYPE_ID+'" handler="'+type.HANDLER+'" description="'+type.DESCRIPTION+'">'+type.TITLE+'</li>');
+        });
+        if(result.more())	result.next();
+      }
     }
   );
 }
@@ -143,6 +149,7 @@ function loadUserTypes(){
 function clearUserTypeForm(){
   $("#userTypesList").find(".userField").each(function(){$(this).css("border","1px solid white");});
   $("#userTypeId").val("");
+  $("#userTypeId").prop("readonly", false);
   $("#handler").val("");
   $("#title").val("");
   $("#description").val("");
@@ -152,6 +159,8 @@ function clearUserTypeForm(){
 
 BX24.ready(function(){
   BX24.init(function(){
+    //Загрузка пользовательских типов полей
+    loadUserTypesList();
     //Загрузка списка типов пользовательских полей
     loadUserFieldTypes();
     //Загрузка списка пользовательских полей в лидах
@@ -189,6 +198,18 @@ BX24.ready(function(){
       if ($(this).attr("fieldmultiple") == "Y") $('#dealFieldMultiple').prop('checked', true);
       $("#dealFieldType").val($(this).attr("usertypeid"));
       $("#deleteDealUserField").removeClass("disabled");
+    });
+    //Выбор существующего пользовательского типа
+    $("#userTypesList").on("click", ".userField",function(){
+      $("#userTypesList").find(".userField").each(function(){$(this).css("border","1px solid white");});
+      $(this).css("border","1px solid black");
+      $("#userTypeId").val($(this).attr("usertypeid"));
+      $("#handler").val($(this).attr("handler"));
+      $("#title").val($(this).html());
+      $("#description").val($(this).attr("description"));
+      $("#userTypeId").prop("readonly", true);
+      $("#addUserType").html("Сохранить");
+      $("#deleteUserType").removeClass("disabled");
     });
     //Очистить форму пользовательского поля лида
     $("#clearLeadUserField").on("click", function(){
@@ -315,6 +336,58 @@ BX24.ready(function(){
         );        
       }
     });
+    //Сохранить пользовательский тип
+    $("#addUserType").on("click", function(){
+      var typeFields ={
+        'USER_TYPE_ID': $("#userTypeId").val(),
+        'HANDLER': $("#handler").val(),
+        'TITLE': $("#title").val(),
+        'DESCRIPTION': $("#description").val()
+      };
+      if ($("#addUserType").html() == "Добавить"){//Создаем новый тип
+        BX24.callMethod(
+          'userfieldtype.add', 
+          typeFields,
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearUserTypeForm();
+              clearUserTypesList();
+              loadUserTypesList();
+              clearUserFieldTypes();
+              loadUserFieldTypes();
+              $("#messages").html("Пользовательский тип добавлен!!!");
+            }
+          }
+        );
+      }else{//Обновляем существующий
+        BX24.callMethod(
+          'userfieldtype.update', 
+          typeFields,
+          function(result){
+            var s = '';
+            s += '<b>' + result.query.method + '</b>\n';
+            s += JSON.stringify(result.query.data, null, '  ') + '\n\n';
+            if(result.error()){
+              s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
+              $("#messages").html(s);
+            }else{
+              clearUserTypeForm();
+              clearUserTypesList();
+              loadUserTypesList();
+              clearUserFieldTypes();
+              loadUserFieldTypes();
+              $("#messages").html("Пользовательский тип обновлен!!!");
+            }
+          }
+        );    
+      }
+    })
     //Удалить пользовательское поле лида
     $("#deleteLeadUserField").on("click", function(){
       var leadId = $("#leadFieldId").val();
@@ -334,9 +407,9 @@ BX24.ready(function(){
                 s += '<span style="color: red">Error! ' + result.error().getStatus() + ': ' + result.error().toString() + '</span>\n';
                 $("#messages").html(s);
               }else{
-                clearLeadUserFieldForm();
-                clearLeadUserFieldsList();
-                loadLeadUserFieldsList();
+                clearuserTypeForm();
+                clearUserTypes();
+                loadUserTypes();
                 $("#messages").html("Поле удалено!!!");
               }
             }
