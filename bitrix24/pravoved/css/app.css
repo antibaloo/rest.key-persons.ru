@@ -1,0 +1,50 @@
+#preorders, #leads {
+  margin: 15px 0px;
+}
+#headerPreorders, .preorder {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 2fr 2fr;
+}
+
+#headerPreorders > div{
+  text-align: center;
+  margin: 1px;
+  padding: 2px;
+  background-color: cyan;
+  /*border: 1px solid blue;*/
+}
+.preorder > div{
+  text-align: center;
+  margin: 1px;
+  padding: 2px;
+  background-color: lightcyan;
+  /*border: 1px solid blue;*/
+}
+.preorder:hover > div {
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+#headerLeads, .lead {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 2fr 8fr 1fr;
+}
+#headerLeads > div{
+  text-align: center;
+  margin: 1px;
+  padding: 2px;
+  background-color: lightsteelblue;
+  /*border: 1px solid blue;*/
+}
+
+.lead > div{
+  text-align: left;
+  margin: 1px;
+  padding: 2px;
+  background-color: steelblue;
+  /*border: 1px solid blue;*/
+}
+.lead:hover > div {
+   background-color: lightgreen;
+  cursor: pointer;
+}
