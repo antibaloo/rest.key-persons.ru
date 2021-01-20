@@ -1,7 +1,7 @@
 <?if($_POST['agreementId'] =="false"|| $_POST['dealId'] == "false"){
   echo "error";
 }else{
-  $queryUrl = 'https://zdz-online.bitrix24.ru/rest/16/opxrg0lm0un683us/crm.deal.list.json/';
+  $queryUrl = 'https://zdz-online.bitrix24.ru/rest/1/qs44feeuf4w6if93/crm.deal.list.json/';
   $queryData = http_build_query(
     array( 
       'order' => array("ID"=>"DESC"),
@@ -47,7 +47,7 @@
   $replay = json_decode(curl_exec($curl), true);
   curl_close($curl);
   
-  $queryUrl = 'https://zdz-online.bitrix24.ru/rest/16/opxrg0lm0un683us/user.get.json/';
+  $queryUrl = 'https://zdz-online.bitrix24.ru/rest/1/qs44feeuf4w6if93/user.get.json/';
   $queryData = http_build_query(
     array( 
       "ID" => $replay['result'][0]['ASSIGNED_BY_ID']
@@ -70,7 +70,7 @@
     $counter = (integer) $replay['result'][0]['UF_CRM_1579668211'];
     $counter++;//Увеличиваем счетчик просмотров
     /*Записываем новое знчение счетчика*/
-    $queryUrl = 'https://zdz-online.bitrix24.ru/rest/16/opxrg0lm0un683us/crm.deal.update.json/';
+    $queryUrl = 'https://zdz-online.bitrix24.ru/rest/1/qs44feeuf4w6if93/crm.deal.update.json/';
     $queryData = http_build_query(
       array( 
         'id' => $replay['result'][0]['ID'],
@@ -183,7 +183,7 @@
 <div class="line"></div>
 <?}else{
       /*Ищем ID копии сделки в направлении "Отклонения"*/
-      $queryUrl = 'https://zdz-online.bitrix24.ru/rest/16/opxrg0lm0un683us/crm.deal.list.json/';
+      $queryUrl = 'https://zdz-online.bitrix24.ru/rest/1/qs44feeuf4w6if93/crm.deal.list.json/';
       $queryData = http_build_query(
         array( 
           'order' => array("ID"=>"DESC"),

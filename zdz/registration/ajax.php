@@ -1,6 +1,7 @@
 <?
 if ($_POST["step"] == "1"){
-  $queryUrl = 'https://zdz-online.bitrix24.ru/rest/16/opxrg0lm0un683us/crm.lead.list.json/';
+  //$queryUrl = 'https://zdz-online.bitrix24.ru/rest/16/opxrg0lm0un683us/crm.lead.list.json/'; 
+  $queryUrl = 'https://zdz-online.bitrix24.ru/rest/1/qs44feeuf4w6if93/crm.lead.list.json/';
   $queryData = http_build_query(
     array( 
       'order' => array("ID"=>"DESC"),
